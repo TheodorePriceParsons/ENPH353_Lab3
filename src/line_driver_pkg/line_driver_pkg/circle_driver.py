@@ -6,10 +6,17 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 
 class Circle_Driver_Node(Node):
-   def __init__(self):
-       super().__init__(node_name='driver_node')
-       # TODO Add code to drive in circles here
-       # END
+    def __init__(self):
+        super().__init__(node_name='driver_node')
+        self.publisher_ = self.create_publisher(msg_type=Twist, topic='/cmd_vel', qos_profile=1)
+        self.move = Twist()
+        self.move.linear.x = 0.5
+        self.move.angular.z = 0.3
+        self.timer = self.create_timer(0.1, self.drive)   
+
+    def drive(self):                                      
+        self.publisher_.publish(msg=self.move)
+
 
 def main(args=None):
     rclpy.init(args=args)

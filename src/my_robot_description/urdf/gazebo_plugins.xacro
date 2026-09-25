@@ -4,6 +4,30 @@
     <xacro:property name="FOV" value="60" />
 
     <!--TODO Adding differential drive - add the DiffDrive plugin here.-->
+    <!-- DiffDrive Plugin (added <gazebo> wrapper & fixed filename) -->
+
+
+
+
+<gazebo>
+  <plugin filename="gz-sim8-diff-drive-system" name="gz::sim::systems::DiffDrive">
+    <left_joint>left_wheel_joint</left_joint>
+    <right_joint>right_wheel_joint</right_joint>
+    <wheel_separation>0.18</wheel_separation>
+    <wheel_radius>0.04</wheel_radius>
+    <topic>/model/my_robot/cmd_vel</topic>
+  </plugin>
+</gazebo>
+
+
+
+<!-- Delete the two TriggeredPublisher blocks entirely -->
+
+<!-- Joint State Publisher (already correct, leave as-is) -->
+<gazebo>
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+    </plugin>
+</gazebo>
 
     <!-- End Adding differential drive -->
 

@@ -64,39 +64,25 @@
 
     <!--TODO Adding wheels links - add "right_wheel_link" and "left_wheel_link" here-->
     <link name="right_wheel_link">
-        <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" l="${wheel_length}" o_xyz="0 0 0" o_rpy="0 0 0" />
-        <visual>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="1.5708 0 0" />
-            <material name="gray" />
-        </visual>
-        <collision>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="1.5708 0 0" />
-        </collision>
-    </link>
-
-    <link name="left_wheel_link">
-        <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" l="${wheel_length}" o_xyz="0 0 0" o_rpy="0 0 0" />
-        <visual>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="1.5708 0 0" />
-            <material name="gray" />
-        </visual>
-        <collision>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
-            </geometry>
-            <origin xyz="0 0 0" rpy="1.5708 0 0" />
-        </collision>
-    </link>
-
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.2"/>
+        <inertia ixx="1.5e-4" ixy="0" ixz="0" iyy="1.5e-4" iyz="0" izz="1.2e-4"/>
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+        </geometry>
+        <material name="yellow"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_length}"/>
+        </geometry>
+    </collision>
+</link>
     <!-- End Adding wheels links -->
 
     <link name="caster_wheel_link">
@@ -127,20 +113,7 @@
     </joint>
 
     <!-- TODO Adding wheels joints - add a joint to the base_link for each wheel-->
-        <joint name="right_wheel_joint" type="continuous">
-        <parent link="base_link" />
-        <child link="right_wheel_link" />
-        <origin xyz="0 -0.09 0" rpy="0 0 0" />
-        <axis xyz="0 1 0" />
-    </joint>
-
-    <joint name="left_wheel_joint" type="continuous">
-        <parent link="base_link" />
-        <child link="left_wheel_link" />
-        <origin xyz="0 0.09 0" rpy="0 0 0" />
-        <axis xyz="0 1 0" />
-    </joint>
-
+    
     <!-- End Adding wheels joints -->
 
     <joint name="base_caster_wheel_joint" type="fixed">
@@ -170,8 +143,8 @@
             <use_pose_vector_msg>false</use_pose_vector_msg>
                 
         </plugin>
-        
     </gazebo>
 
 
 </robot>
+
